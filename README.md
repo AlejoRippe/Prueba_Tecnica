@@ -1,123 +1,131 @@
-🐱 Cat Facts & Giphy App
+# 🐱 Cat Facts & Giphy App
+
 Una aplicación web que combina datos curiosos sobre gatos con GIFs relacionados, desarrollada con ASP.NET Core (backend) y Angular (frontend).
-📋 Características
 
-✅ Obtención de facts aleatorios sobre gatos desde API externa
-✅ GIFs relacionados obtenidos automáticamente desde Giphy API
-✅ Historial persistente de todas las búsquedas realizadas
-✅ Interfaz moderna con diseño responsive
-✅ Guardado automático en base de datos local
-✅ Estadísticas de uso personal
+## 📋 Características
 
-🏗️ Arquitectura
-Backend (ASP.NET Core)
+- ✅ Obtención de facts aleatorios sobre gatos desde API externa
+- ✅ GIFs relacionados obtenidos automáticamente desde Giphy API
+- ✅ Historial persistente de todas las búsquedas realizadas
+- ✅ Interfaz moderna con diseño responsive
+- ✅ Guardado automático en base de datos local
+- ✅ Estadísticas de uso personal
 
-Framework: ASP.NET Core Web API
-Base de Datos: SQLite con Entity Framework Core
-APIs Externas: Cat Facts API + Giphy API
-Patrones: Repository Pattern, Dependency Injection
+## 🏗️ Arquitectura
 
-Frontend (Angular)
+### Backend (ASP.NET Core)
 
-Framework: Angular con TypeScript
-Estilos: CSS personalizado con diseño moderno
-HTTP Client: Para comunicación con backend
-UI/UX: Interfaz responsive con efectos visuales
+-   **Framework**: ASP.NET Core Web API
+-   **Base de Datos**: SQLite con Entity Framework Core
+-   **APIs Externas**: Cat Facts API + Giphy API
+-   **Patrones**: Repository Pattern, Dependency Injection
 
-🚀 Instalación y Configuración
-Pre-requisitos
+### Frontend (Angular)
 
-Backend:
+-   **Framework**: Angular con TypeScript
+-   **Estilos**: CSS personalizado con diseño moderno
+-   **HTTP Client**: Para comunicación con backend
+-   **UI/UX**: Interfaz responsive con efectos visuales
 
-.NET 8.0 SDK
-Visual Studio 2022 o VS Code
+## 🚀 Instalación y Configuración
 
+### Pre-requisitos
 
-Frontend:
+#### Backend:
 
-Node.js 16+
-Angular CLI: npm install -g @angular/cli
+-   .NET 8.0 SDK
+-   Visual Studio 2022 o VS Code
 
+#### Frontend:
 
+-   Node.js 16+
+-   Angular CLI: `npm install -g @angular/cli`
 
-🔧 Configuración del Backend
+### 🔧 Configuración del Backend
 
-Navegar al directorio del backend:
-cd Backend/CatFactsGiphyAPI
+1.  Navegar al directorio del backend:
+    ```bash
+    cd Backend/CatFactsGiphyAPI
+    ```
+2.  Restaurar dependencias:
+    ```bash
+    dotnet restore
+    ```
+3.  Crear base de datos:
+    ```bash
+    dotnet ef database update
+    ```
+    O la base de datos se creará automáticamente al ejecutar.
+4.  Ejecutar backend:
+    ```bash
+    dotnet run
+    ```
+✅ **Verificar**: El backend estará disponible en `http://localhost:5000`
 
-Restaurar dependencias:
-dotnet restore
+### 🌐 Configuración del Frontend
 
-Crear base de datos:
-dotnet ef database update
-O la base de datos se creará automáticamente al ejecutar.
-Ejecutar backend:
-dotnet run
-✅ Verificar: El backend estará disponible en http://localhost:5000
+1.  Navegar al directorio del frontend:
+    ```bash
+    cd Frontend/cat-facts-app
+    ```
+2.  Instalar dependencias:
+    ```bash
+    npm install
+    ```
+3.  Ejecutar frontend:
+    ```bash
+    ng serve
+    ```
+✅ **Verificar**: El frontend estará disponible en `http://localhost:4200`
 
-🌐 Configuración del Frontend
+## 🎮 Uso de la Aplicación
 
-Navegar al directorio del frontend:
-cd Frontend/cat-facts-app
+### Funcionalidades Principales
 
-Instalar dependencias:
-npm install
+#### 🎲 Generar Fact:
 
-Ejecutar frontend:
-ng serve
-✅ Verificar: El frontend estará disponible en http://localhost:4200
+-   Click en "Obtener Nuevo Fact"
+-   Se obtiene un dato curioso sobre gatos
+-   Se muestra un GIF relacionado automáticamente
+-   Se guarda automáticamente en el historial
 
-🎮 Uso de la Aplicación
-Funcionalidades Principales
+#### 🔄 Cambiar GIF:
 
-🎲 Generar Fact:
+-   Click en "Cambiar GIF"
+-   Mantiene el mismo fact pero busca un GIF diferente
+-   Utiliza sistema de offset para variedad
 
-Click en "Obtener Nuevo Fact"
-Se obtiene un dato curioso sobre gatos
-Se muestra un GIF relacionado automáticamente
-Se guarda automáticamente en el historial
+#### 📚 Ver Historial:
 
+-   Click en "Ver Historial"
+-   Muestra todos los facts generados anteriormente
+-   Ordenados por fecha (más recientes primero)
+-   Click en cualquier elemento para verlo de nuevo
 
-🔄 Cambiar GIF:
+## 🔗 APIs Utilizadas
 
-Click en "Cambiar GIF"
-Mantiene el mismo fact pero busca un GIF diferente
-Utiliza sistema de offset para variedad
+### APIs Externas
 
+-   **Cat Facts API**: `https://catfact.ninja/fact`
+    -   Proporciona datos curiosos sobre gatos
+    -   No requiere autenticación
 
-📚 Ver Historial:
+-   **Giphy API**: `https://api.giphy.com/v1/gifs/search`
+    -   Proporciona GIFs relacionados con las palabras clave
+    -   Requiere API key (incluida una demo)
 
-Click en "Ver Historial"
-Muestra todos los facts generados anteriormente
-Ordenados por fecha (más recientes primero)
-Click en cualquier elemento para verlo de nuevo
+### APIs Internas
 
+-   `GET /api/fact` - Obtiene nuevo fact con GIF
+-   `GET /api/gif?query={palabras}&offset={numero}` - Obtiene GIF específico
+-   `GET /api/history` - Obtiene historial de búsquedas
 
-🔗 APIs Utilizadas
-APIs Externas
+## 📊 Base de Datos
 
-Cat Facts API: https://catfact.ninja/fact
+**Tabla**: `SearchHistory`
 
-Proporciona datos curiosos sobre gatos
-No requiere autenticación
-
-
-Giphy API: https://api.giphy.com/v1/gifs/search
-
-Proporciona GIFs relacionados con las palabras clave
-Requiere API key (incluida una demo)
-
-
-
-APIs Internas
-
-GET /api/fact - Obtiene nuevo fact con GIF
-GET /api/gif?query={palabras}&offset={numero} - Obtiene GIF específico
-GET /api/history - Obtiene historial de búsquedas
-
-📊 Base de Datos
-Tabla: SearchHistory
-sqlCREATE TABLE SearchHistories (
+```sql
+CREATE TABLE SearchHistories (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     SearchDate DATETIME NOT NULL,
     FactText TEXT NOT NULL,
