@@ -1,0 +1,116 @@
+<div class="app-container">
+  <!-- Header -->
+  <header class="header">
+    <h1>{{ title }}</h1>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="main-content">
+    <!-- Pestañas -->
+    <div class="tabs-container">
+      <button
+        (click)="setActiveTab('current')"
+        [class]="activeTab === 'current' ? 'tab-button active' : 'tab-button'">
+        Resultado Actual
+      </button>
+      <button
+        (click)="setActiveTab('history')"
+        [class]="activeTab === 'history' ? 'tab-button active' : 'tab-button'">
+        Historial
+      </button>
+    </div>
+
+    <!-- Pestaña resultado actual -->
+    <div *ngIf="activeTab === 'current'" class="tab-content">
+      <!-- Mensaje error -->
+      <div *ngIf="error" class="error-message">
+        <strong>Error:</strong> {{ error }}
+      </div>
+
+      <!-- Estado Cargando -->
+      <div *ngIf="isLoadingFact" class="loading">
+        🔄 Cargando...
+      </div>
+
+      <!-- Contenido -->
+      <div *ngIf="currentFact && !isLoadingFact" class="content-grid">
+        <!-- GIF Columna -->
+        <div class="gif-section">
+          <div class="card">
+            <div class="gif-container">
+              <img 
+                *ngIf="currentFact.gifUrl" 
+                [src]="currentFact.gifUrl" 
+                [alt]="'GIF para: ' + currentFact.queryWords"
+                class="gif-image">
+              <div *ngIf="!currentFact.gifUrl" class="no-gif">
+                🖼️ Gif no valido
+              </div>
+            </div>
+            <p class="query-text">
+              Búsqueda: "<strong>{{ currentFact.queryWords }}</strong>"
+            </p>
+            <button 
+              (click)="refreshGif()" 
+              [disabled]="isLoadingFact"
+              class="btn btn-secondary">
+              🔄 Cambiar GIF
+            </button>
+          </div>
+        </div>
+
+        <!-- Columna Dato -->
+        <div class="fact-section">
+          <div class="card">
+            <h2>🐱 Dato Curioso</h2>
+            <p class="fact-text">{{ currentFact.fact }}</p>
+            <button 
+              (click)="loadNewFact()" 
+              [disabled]="isLoadingFact"
+              class="btn btn-primary">
+              ✨ Nuevo Dato
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenido pestaña historial -->
+    <div *ngIf="activeTab === 'history'" class="tab-content">
+      <!-- Estado cargando -->
+      <div *ngIf="isLoadingHistory" class="loading">
+        🔄 Cargando historial...
+      </div>
+
+      <!-- Tabla historial -->
+      <div *ngIf="!isLoadingHistory" class="card">
+        <h2>📋 Historial de Búsquedas</h2>
+        
+        <div *ngIf="searchHistory.length === 0" class="no-history">
+          📭 No hay búsquedas en el historial aún.
+        </div>
+
+        <div *ngIf="searchHistory.length > 0" class="table-container">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>📅 Fecha</th>
+                <th>📝 Dato</th>
+                <th>🔍 Búsqueda</th>
+                <th>🎬 GIF</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of searchHistory">
+                <td class="date-cell">{{ formatDate(item.searchDate) }}</td>
+                <td class="fact-cell" [title]="item.factText">{{ item.factText }}</td>
+                <td><span class="query-tag">{{ item.queryWords }}</span></td>
+                <td><a [href]="item.gifUrl" target="_blank" class="gif-link">🔗 Ver GIF</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

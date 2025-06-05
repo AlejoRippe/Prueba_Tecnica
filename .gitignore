@@ -1,0 +1,66 @@
+# === ARCHIVOS GLOBALES A IGNORAR ===
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.temp
+
+# === BACKEND (.NET) ===
+
+# Build outputs
+Backend/*/bin/
+Backend/*/obj/
+Backend/*/out/
+Backend/*/.vs/
+Backend/*/packages/
+
+# User-specific files
+Backend/*/*.user
+Backend/*/*.suo
+Backend/*/*.cache
+Backend/*/*.docstates
+
+# Database
+Backend/*/*.db
+Backend/*/*.sqlite
+Backend/*/*.sqlite3
+Backend/*/App_Data/
+
+# Secrets (IMPORTANTE)
+Backend/*/appsettings.Production.json
+Backend/*/secrets.json
+
+# === FRONTEND (Angular/Node.js) ===
+
+# Dependencies
+Frontend/*/node_modules/
+Frontend/*/npm-debug.log*
+Frontend/*/yarn-debug.log*
+Frontend/*/yarn-error.log*
+
+# Build outputs
+Frontend/*/dist/
+Frontend/*/build/
+Frontend/*/.angular/cache/
+
+# Environment files
+Frontend/*/.env
+Frontend/*/.env.local
+Frontend/*/.env.production
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
